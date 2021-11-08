@@ -12,8 +12,12 @@ import java.awt.event.WindowEvent;
 public class JMSApp {
     private static JMSWindow jmsWindow;
     private static ActiveMQConnectionFactory connectionFactory;
-    private static Connection connection;
-    private static Session session;
+
+    private static Session sessionProducer;
+    private static Session sessionConsumer;
+    private static Connection connectionProducer;
+    private static Connection connectionConsumer;
+
     private static Destination destination;
     private static String queue;
 
@@ -41,9 +45,18 @@ public class JMSApp {
         jmsWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if(connection != null){
+                if(connectionProducer != null){
                     try {
-                        connection.close();
+                        connectionProducer.close();
+                    }
+                    catch (JMSException exception){
+                        System.out.println(exception.getLinkedException());
+                        System.out.println(JMSApp.class.getName());
+                    }
+                }
+                if(connectionConsumer != null){
+                    try {
+                        connectionConsumer.close();
                     }
                     catch (JMSException exception){
                         System.out.println(exception.getLinkedException());
@@ -52,18 +65,52 @@ public class JMSApp {
                 }
             }
         });
+
+
     }
 
-    public static Boolean connected(){
+    public static Boolean connectedProducer(){
         try {
-            if(connection == null){
+            if(connectionProducer == null){
                 connectionFactory = getConnectionFactory();
-                connection = connectionFactory.createConnection();
-                connection.start();
-                session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+                connectionProducer = connectionFactory.createConnection();
+                connectionProducer.start();
+                int sessionCode = Integer.parseInt(jmsWindow.buttonGroup_1.getSelection().getActionCommand());
+                if(sessionCode > 0){
+                    sessionProducer = connectionProducer.createSession(false, sessionCode);
+                }
+                else {
+                    sessionProducer = connectionProducer.createSession(true, 0);
+                }
             }
             else {
-                connection.start();
+                connectionProducer.start();
+            }
+            return true;
+        }
+        catch (JMSException exception){
+            System.out.println(exception.getLinkedException());
+            System.out.println(JMSApp.class.getName());
+            return false;
+        }
+    }
+
+    public static Boolean connectedConsumer(){
+        try {
+            if(connectionConsumer == null){
+                connectionFactory = getConnectionFactory();
+                connectionConsumer = connectionFactory.createConnection();
+                connectionConsumer.start();
+                int sessionCode = Integer.parseInt(jmsWindow.buttonGroup_1.getSelection().getActionCommand());
+                if(sessionCode > 0){
+                    sessionConsumer = connectionConsumer.createSession(false, sessionCode);
+                }
+                else {
+                    sessionConsumer = connectionConsumer.createSession(true, 0);
+                }
+            }
+            else {
+                connectionConsumer.start();
             }
             return true;
         }
@@ -76,19 +123,24 @@ public class JMSApp {
 
     public static void clickSendButton() {
         queue = jmsWindow.getQueueSendName().equals("") ? "SimpleQueue" : jmsWindow.getQueueSendName();
-        if(connected() && !jmsWindow.getMessageSendText().equals("")){
+        if(connectedProducer() && !jmsWindow.getMessageSendText().equals("")){
             jmsWindow.SendConnectedSucces();
             if(jmsWindow.isPtP()){
-                destination = getDestinationQueue();
+                destination = getDestinationQueueProducer();
             }
             else {
-                destination = getDestinationTopic();
+                destination = getDestinationTopicProducer();
             }
             if(destination != null){
                 try {
-                    MessageProducer producer = session.createProducer(destination);
-                    producer.setDeliveryMode(DeliveryMode.PERSISTENT);
-                    TextMessage message = session.createTextMessage(jmsWindow.getMessageSendText());
+                    System.out.println("INFO sessionProducer");
+                    System.out.println("getAcknowledgeMode = " + sessionProducer.getAcknowledgeMode());
+                    System.out.println("getMessageListener = " + sessionProducer.getMessageListener());
+                    System.out.println("getTransacted = " + sessionProducer.getTransacted());
+                    MessageProducer producer = sessionProducer.createProducer(destination);
+                    int persistent = Integer.parseInt(jmsWindow.buttonGroup_2.getSelection().getActionCommand());
+                    producer.setDeliveryMode(persistent);
+                    TextMessage message = sessionProducer.createTextMessage(jmsWindow.getMessageSendText());
                     producer.send(message);
                     jmsWindow.SendSuccess();
                 }
@@ -109,21 +161,24 @@ public class JMSApp {
 
     public static void clickReceivedButton() {
         queue = jmsWindow.getQueueSendName().equals("") ? "SimpleQueue" : jmsWindow.getQueueSendName();
-        if(connected() && !jmsWindow.getMessageSendText().equals("")){
+        if(connectedConsumer() && !jmsWindow.getMessageSendText().equals("")){
             jmsWindow.SendConnectedSucces();
             if(jmsWindow.isPtP()){
-                destination = getDestinationQueue();
+                destination = getDestinationQueueConsumer();
             }
             else {
-                destination = getDestinationTopic();
+                destination = getDestinationTopicConsumer();
             }
             if(destination != null){
                 try {
-                    MessageConsumer consumer = session.createConsumer(destination);
+                    System.out.println("INFO sessionConsumer");
+                    System.out.println("getAcknowledgeMode = " + sessionConsumer.getAcknowledgeMode());
+                    System.out.println("getMessageListener = " + sessionConsumer.getMessageListener());
+                    System.out.println("getTransacted = " + sessionConsumer.getTransacted());
+                    MessageConsumer consumer = sessionConsumer.createConsumer(destination);
                     consumer.setMessageListener(new MessageListener() {
                         @Override
                         public void onMessage(Message message) {
-
                             TextMessage textMessage = (TextMessage) message;
                             try {
                                 jmsWindow.setTextReceiver(textMessage.getText());
@@ -151,15 +206,21 @@ public class JMSApp {
         }
     }
 
-    //embedded broker ?
     private static ActiveMQConnectionFactory getConnectionFactory(){
-        return new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_USER, ActiveMQConnectionFactory.DEFAULT_PASSWORD, "failover://tcp://localhost:61616");
+        if(jmsWindow.chckbxNewCheckBox.isSelected()){
+            jmsWindow.chckbxNewCheckBox.setEnabled(false);
+            return new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
+        }
+        else {
+            jmsWindow.chckbxNewCheckBox.setEnabled(false);
+            return new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_USER, ActiveMQConnectionFactory.DEFAULT_PASSWORD, "failover://tcp://localhost:61616");
+        }
     }
 
     //Подключаемся к модели точка-точка
-    private static Destination getDestinationQueue(){
+    private static Destination getDestinationQueueProducer(){
         try {
-            return session.createQueue(queue);
+            return sessionProducer.createQueue(queue);
         }
         catch (JMSException exception){
             System.out.println(exception.getLinkedException());
@@ -169,9 +230,34 @@ public class JMSApp {
     }
 
     //Подключаемся к модели подписчик-издатель
-    private static Destination getDestinationTopic(){
+    private static Destination getDestinationTopicProducer(){
         try {
-            return session.createTopic(queue);
+            return sessionProducer.createTopic(queue);
+        }
+        catch (JMSException exception){
+            System.out.println(exception.getLinkedException());
+            System.out.println(JMSApp.class.getName());
+            return null;
+        }
+    }
+
+
+    //Подключаемся к модели точка-точка
+    private static Destination getDestinationQueueConsumer(){
+        try {
+            return sessionConsumer.createQueue(queue);
+        }
+        catch (JMSException exception){
+            System.out.println(exception.getLinkedException());
+            System.out.println(JMSApp.class.getName());
+            return null;
+        }
+    }
+
+    //Подключаемся к модели подписчик-издатель
+    private static Destination getDestinationTopicConsumer(){
+        try {
+            return sessionConsumer.createTopic(queue);
         }
         catch (JMSException exception){
             System.out.println(exception.getLinkedException());

@@ -1,12 +1,40 @@
 package view;
 
-import java.awt.Color;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.*;
 
 /**
  *
  * @author Egorov A.
  */
 public class JMSWindow extends javax.swing.JFrame {
+    private javax.swing.ButtonGroup buttonGroup1;
+    public javax.swing.JButton jBConnectedListener;
+    public javax.swing.JButton jBSendMessage;
+    public ButtonGroup buttonGroup_1;
+    public ButtonGroup buttonGroup_2;
+    public JCheckBox chckbxNewCheckBox;
+    private JLabel jLConnected;
+    private JLabel jLConnected1;
+    private JLabel jLInfSend;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel7;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JRadioButton jRBPtP;
+    private JRadioButton jRBPubSub;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane2;
+    private JSeparator jSeparator1;
+    private JSeparator jSeparator3;
+    private JTextField jTFNameModel;
+    private JTextPane jTPReceivedMess;
+    private JTextPane jTPTextMessage;
 
     public JMSWindow() {
         initComponents();
@@ -19,18 +47,30 @@ public class JMSWindow extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel1.setBounds(2, 2, 598, 17);
         jLabel2 = new javax.swing.JLabel();
+        jLabel2.setBounds(12, 30, 147, 14);
         jTFNameModel = new javax.swing.JTextField();
+        jTFNameModel.setBounds(12, 50, 234, 20);
         jLabel3 = new javax.swing.JLabel();
+        jLabel3.setBounds(12, 76, 90, 14);
         jRBPtP = new javax.swing.JRadioButton();
+        jRBPtP.setBounds(12, 92, 95, 23);
         jRBPubSub = new javax.swing.JRadioButton();
+        jRBPubSub.setBounds(115, 92, 151, 23);
         jSeparator1 = new javax.swing.JSeparator();
+        jSeparator1.setBounds(12, 117, 578, 10);
         jLabel4 = new javax.swing.JLabel();
+        jLabel4.setBounds(12, 206, 110, 14);
         jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane1.setBounds(12, 231, 578, 87);
         jTPTextMessage = new javax.swing.JTextPane();
         jBSendMessage = new javax.swing.JButton();
+        jBSendMessage.setBounds(12, 329, 177, 23);
         jLConnected = new javax.swing.JLabel();
+        jLConnected.setBounds(250, 53, 185, 14);
         jLInfSend = new javax.swing.JLabel();
+        jLInfSend.setBounds(163, 251, 0, 0);
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jBConnectedListener = new javax.swing.JButton();
@@ -79,73 +119,6 @@ public class JMSWindow extends javax.swing.JFrame {
         jLConnected.setText("Соединение не установлено");
 
         jLInfSend.setToolTipText("");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jSeparator1)
-                                        .addComponent(jScrollPane1)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.
-                                                        GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel2)
-                                                        .addComponent(jLabel3)
-                                                        .addComponent(jLabel4)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(jBSendMessage)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jLInfSend))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.
-                                                                        GroupLayout.Alignment.TRAILING, false)
-                                                                        .addComponent(jTFNameModel, javax.swing.GroupLayout.
-                                                                                Alignment.LEADING)
-                                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                jPanel1Layout.createSequentialGroup()
-                                                                                        .addComponent(jRBPtP)
-                                                                                        .addGap(14, 14, 14)
-                                                                                        .addComponent(jRBPubSub)))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jLConnected)))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.
-                                        GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTFNameModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLConnected))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jRBPtP)
-                                        .addComponent(jRBPubSub))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jBSendMessage)
-                                        .addComponent(jLInfSend))
-                                .addGap(0, 13, Short.MAX_VALUE))
-        );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -208,26 +181,91 @@ public class JMSWindow extends javax.swing.JFrame {
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                                        .addComponent(jPanel1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                                        .addComponent(jPanel2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                                .addGap(18)
+                                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
+        jPanel1.setLayout(null);
+        jPanel1.add(jLabel1);
+        jPanel1.add(jSeparator1);
+        jPanel1.add(jScrollPane1);
+        jPanel1.add(jLabel2);
+        jPanel1.add(jLabel3);
+        jPanel1.add(jLabel4);
+        jPanel1.add(jBSendMessage);
+        jPanel1.add(jLInfSend);
+        jPanel1.add(jTFNameModel);
+        jPanel1.add(jRBPtP);
+        jPanel1.add(jRBPubSub);
+        jPanel1.add(jLConnected);
 
+        JLabel lblNewLabel_1 = new JLabel("Настройки сессии");
+        lblNewLabel_1.setBounds(12, 127, 117, 14);
+        jPanel1.add(lblNewLabel_1);
+
+        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("TRANSACTED");
+        rdbtnNewRadioButton_1.setActionCommand("0");
+        rdbtnNewRadioButton_1.setBounds(142, 123, 117, 23);
+        jPanel1.add(rdbtnNewRadioButton_1);
+
+        JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("AUTO_ACK", true);
+        rdbtnNewRadioButton_2.setActionCommand("1");
+        rdbtnNewRadioButton_2.setBounds(261, 123, 99, 23);
+        jPanel1.add(rdbtnNewRadioButton_2);
+
+        JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("CLIENT_ACK");
+        rdbtnNewRadioButton_3.setActionCommand("2");
+        rdbtnNewRadioButton_3.setBounds(362, 123, 110, 23);
+        jPanel1.add(rdbtnNewRadioButton_3);
+
+        JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("DUPS_OK_ACK");
+        rdbtnNewRadioButton_4.setActionCommand("3");
+        rdbtnNewRadioButton_4.setBounds(474, 123, 122, 23);
+        jPanel1.add(rdbtnNewRadioButton_4);
+
+        buttonGroup_1 = new ButtonGroup();
+        buttonGroup_1.add(rdbtnNewRadioButton_1);
+        buttonGroup_1.add(rdbtnNewRadioButton_2);
+        buttonGroup_1.add(rdbtnNewRadioButton_3);
+        buttonGroup_1.add(rdbtnNewRadioButton_4);
+
+        JLabel lblNewLabel_2 = new JLabel("Тип сообщения");
+        lblNewLabel_2.setBounds(10, 163, 99, 14);
+        jPanel1.add(lblNewLabel_2);
+
+        JRadioButton rdbtnNewRadioButton_5 = new JRadioButton("PERSISTENT", true);
+        rdbtnNewRadioButton_5.setActionCommand("2");
+        rdbtnNewRadioButton_5.setBounds(142, 159, 109, 23);
+        jPanel1.add(rdbtnNewRadioButton_5);
+
+        JRadioButton rdbtnNewRadioButton_6 = new JRadioButton("NON_PERSISTENT");
+        rdbtnNewRadioButton_6.setActionCommand("1");
+        rdbtnNewRadioButton_6.setBounds(261, 159, 134, 23);
+        jPanel1.add(rdbtnNewRadioButton_6);
+
+        buttonGroup_2 = new ButtonGroup();
+        buttonGroup_2.add(rdbtnNewRadioButton_5);
+        buttonGroup_2.add(rdbtnNewRadioButton_6);
+
+        chckbxNewCheckBox = new JCheckBox("Embedded broker");
+        chckbxNewCheckBox.setBounds(426, 47, 97, 23);
+        jPanel1.add(chckbxNewCheckBox);
+
+        getContentPane().setLayout(layout);
         pack();
     }// //GEN-END:initComponents
 
@@ -304,29 +342,4 @@ public class JMSWindow extends javax.swing.JFrame {
         this.jLInfSend.setText("Сообщение не удалось отправить");
         this.jLInfSend.setForeground(Color.red);
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    public javax.swing.JButton jBConnectedListener;
-    public javax.swing.JButton jBSendMessage;
-    private javax.swing.JLabel jLConnected;
-    private javax.swing.JLabel jLConnected1;
-    private javax.swing.JLabel jLInfSend;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRBPtP;
-    private javax.swing.JRadioButton jRBPubSub;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTFNameModel;
-    private javax.swing.JTextPane jTPReceivedMess;
-    private javax.swing.JTextPane jTPTextMessage;
-    // End of variables declaration//GEN-END:variables
 }
