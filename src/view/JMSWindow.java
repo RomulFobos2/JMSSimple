@@ -262,7 +262,7 @@ public class JMSWindow extends javax.swing.JFrame {
         buttonGroup_2.add(rdbtnNewRadioButton_6);
 
         chckbxNewCheckBox = new JCheckBox("Embedded broker");
-        chckbxNewCheckBox.setBounds(426, 47, 97, 23);
+        chckbxNewCheckBox.setBounds(426, 47, 140, 23);
         jPanel1.add(chckbxNewCheckBox);
 
         getContentPane().setLayout(layout);
